@@ -1,0 +1,18 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+class Post (models.Model):
+    # Définition du titre d'un Poste (dans le blog) du côté de l'administration
+    title = models.CharField(max_length=255)
+    # Choix de l'auteur du Poste du côté de l'administration
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Espace de texte pour la description du Poste
+    body = models.TextField()
+
+
+    # Fonction qui affiche on peux dire l'entête du Poste
+    def __str__(self):
+        return self.title + ' | ' + str(self.author)
+
+""" Après chaque action ici, il faut migrer, c-a-d 'python manage.py migrate' avant de lancer le serveur,
+pour sauvegarder dans la base de données. """   
