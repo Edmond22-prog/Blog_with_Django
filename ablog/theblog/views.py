@@ -1,8 +1,8 @@
 from .models import Post
 from django.shortcuts import render
 # Importation des vues générique de Django : ListView et DetailView
-from django.views.generic import ListView, DetailView, CreateView
-from .forms import PostForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from .forms import EditForm, PostForm
 
 # Create your views here.
 """ def home (request):
@@ -27,3 +27,10 @@ class AddPostView(CreateView):
     #fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
     # On pouvait aussi choisir celle que l'on veut utiliser en faisant ce qui suit :
     # fields = ('propriete1', 'propriete2', ...)
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    form_class = EditForm
+    template_name = 'update_post.html'
+    #fields = ['title', 'body']

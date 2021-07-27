@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+    Edit Blog Post
+{% endblock %}
+
+{% block content %}
+
+    <h1>Update Post...</h1>
+    <br><br>
+    <div class='form-group'>
+        <form method="POST">
+    {% comment %} Je pense que ces commandes Django permettent d'importer les classes du 'models.py' {% endcomment %} 
+            {% csrf_token %}
+            {{ form.as_p }} {% comment %} Positionne les elements du formulaire comme une balise choisis. ici c'est <p>{% endcomment %}
+            <button class="btn btn-secondary">Update</button>
+    </div>
+
+{% endblock %}
