@@ -1,7 +1,7 @@
 from .models import Post
 from django.shortcuts import render
 # Importation des vues générique de Django : ListView et DetailView
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 """ def home (request):
@@ -17,3 +17,11 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
+
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'add_post.html'
+    fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
+    # On pouvait aussi choisir celle que l'on veut utiliser en faisant ce qui suit :
+    # fields = ('propriete1', 'propriete2', ...)
