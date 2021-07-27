@@ -1,0 +1,10 @@
+{% comment %} C'est le meme 'post' declare dans la page home.html qui est utilise ici  {% endcomment %}
+
+<h1> {{ post.title }} </h1>
+<small>By : {{ post.author.first_name }} {{ post.author.last_name }}</small><br>
+<hr>
+<br>
+{{ post.body }}
+
+<br><br>
+<a href="{% url 'home' %}">Back</a>
