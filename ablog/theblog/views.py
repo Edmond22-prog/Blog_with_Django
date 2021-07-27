@@ -2,6 +2,7 @@ from .models import Post
 from django.shortcuts import render
 # Importation des vues générique de Django : ListView et DetailView
 from django.views.generic import ListView, DetailView, CreateView
+from .forms import PostForm
 
 # Create your views here.
 """ def home (request):
@@ -20,8 +21,9 @@ class ArticleDetailView(DetailView):
 
 
 class AddPostView(CreateView):
-    model = Post
+    model = Post   # Lorsque l'on choisit PostForm, on a plus besoin de fields car il le gere deja
+    form_class = PostForm
     template_name = 'add_post.html'
-    fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
+    #fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
     # On pouvait aussi choisir celle que l'on veut utiliser en faisant ce qui suit :
     # fields = ('propriete1', 'propriete2', ...)
