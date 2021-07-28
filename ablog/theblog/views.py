@@ -14,7 +14,8 @@ from django.urls import reverse_lazy
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
+    #ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
+    ordering = ['-post_date']
 
 
 class ArticleDetailView(DetailView):
