@@ -1,8 +1,9 @@
 from .models import Post
 from django.shortcuts import render
 # Importation des vues générique de Django : ListView et DetailView
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import EditForm, PostForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 """ def home (request):
@@ -13,6 +14,7 @@ from .forms import EditForm, PostForm
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
+    ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
 
 
 class ArticleDetailView(DetailView):
@@ -34,3 +36,9 @@ class UpdatePostView(UpdateView):
     form_class = EditForm
     template_name = 'update_post.html'
     #fields = ['title', 'body']
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'delete_post.html'
+    success_url = reverse_lazy('home')  #Lorsque le Poste est supprimé, ca renvoi automatiquement au home
