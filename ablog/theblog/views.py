@@ -18,6 +18,17 @@ class HomeView(ListView):
     #ordering = ['-post_date']
 
 
+# Fonction qui recupere une requete et le nom d'une categorie, pour renvoyer une page contenant tous
+# les postes de cette categorie
+def CategoryView(request, cats):
+    # Ici c'est une requete de recuperation des postes dont la categorie est <cats>
+    # Le resultat de la requete est stocke dans la variable <category_posts>
+    category_posts = Post.objects.filter(category=cats)
+    # Le nom de la categorie <cats> et la liste des postes de cette categorie <category_posts> est envoye
+    # a la page <categories.html>
+    return render(request, 'categories.html', {'cats':cats, 'category_posts':category_posts})
+
+
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
