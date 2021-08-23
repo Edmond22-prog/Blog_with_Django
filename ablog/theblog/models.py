@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime, date
 
+class Category (models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    
+    def get_absolute_url(self):
+        return reverse("home")
+
 class Post (models.Model):
     # Définition du titre d'un Poste (dans le blog) du côté de l'administration
     title = models.CharField(max_length=255)
@@ -11,6 +21,7 @@ class Post (models.Model):
     # Espace de texte pour la description du Poste
     body = models.TextField()
     post_date = models.DateField(auto_now_add=True)
+    category = models.CharField(max_length=255, default='Coding')
 
 
     # Fonction qui affiche on peux dire l'entête du Poste du coté administrateur

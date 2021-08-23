@@ -1,6 +1,6 @@
-from .models import Post
+from .models import Category, Post
 from django.shortcuts import render
-# Importation des vues générique de Django : ListView et DetailView
+# Importation des vues générique de Django
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import EditForm, PostForm
 from django.urls import reverse_lazy
@@ -14,8 +14,8 @@ from django.urls import reverse_lazy
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    #ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
-    ordering = ['-post_date']
+    ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
+    #ordering = ['-post_date']
 
 
 class ArticleDetailView(DetailView):
@@ -24,12 +24,19 @@ class ArticleDetailView(DetailView):
 
 
 class AddPostView(CreateView):
-    model = Post   # Lorsque l'on choisit PostForm, on a plus besoin de fields car il le gere deja
+    model = Post   
+    # Lorsque l'on choisit PostForm, on a plus besoin de fields car il le gere deja
     form_class = PostForm
     template_name = 'add_post.html'
     #fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
     # On pouvait aussi choisir celle que l'on veut utiliser en faisant ce qui suit :
     # fields = ('propriete1', 'propriete2', ...)
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    template_name = 'add_category.html'
+    fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
 
 
 class UpdatePostView(UpdateView):
