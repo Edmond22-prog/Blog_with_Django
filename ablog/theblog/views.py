@@ -23,10 +23,12 @@ class HomeView(ListView):
 def CategoryView(request, cats):
     # Ici c'est une requete de recuperation des postes dont la categorie est <cats>
     # Le resultat de la requete est stocke dans la variable <category_posts>
-    category_posts = Post.objects.filter(category=cats)
+    # La methode <.replace()> remplace le deuxieme argument par le premier
+    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     # Le nom de la categorie <cats> et la liste des postes de cette categorie <category_posts> est envoye
     # a la page <categories.html>
-    return render(request, 'categories.html', {'cats':cats, 'category_posts':category_posts})
+    # La methode <.title()> rend la premiere lettre d'un mot en majuscule
+    return render(request, 'categories.html', {'cats':cats.title().replace('-', ' '), 'category_posts':category_posts})
 
 
 class ArticleDetailView(DetailView):
