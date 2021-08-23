@@ -24,9 +24,14 @@
     </small><br>
     <hr>
     <br>
-    {{ post.body }}
+    {% comment %} 
+        L'option <safe> permet l'insertion et la prise en compte des balises HTML de l'user 
+        sur la page.
+    {% endcomment %}
+    {{ post.body | safe }}
 
     <br><br>
     <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
-
+    <br><br>
+    
 {% endblock %}
