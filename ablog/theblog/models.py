@@ -21,7 +21,7 @@ class Post (models.Model):
     # Espace de texte pour la description du Poste
     body = models.TextField()
     post_date = models.DateField(auto_now_add=True)
-    category = models.CharField(max_length=255, default='Coding')
+    category = models.CharField(max_length=255, default='coding')
 
 
     # Fonction qui affiche on peux dire l'entête du Poste du coté administrateur
