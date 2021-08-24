@@ -17,6 +17,21 @@ class HomeView(ListView):
     ordering = ['-id']  # Permet d'ordonner les Postes, ici c'est du plus recent au plus ancien
     #ordering = ['-post_date']
 
+    """ Cette fonction permet de recuperer toutes les categories et de les afficher (dropdown) dans la
+    vue choisit (ici HomeView) """
+    def get_context_data(self, *args, **kwargs):
+        # Recuperation de toutes les categories
+        cat_menu = Category.objects.all()
+        # Aucune idee du reste
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context        
+
+
+def CategoryListView(request):
+    cat_menu_list = Category.objects.all()
+    return render(request, 'category_list.html', {'cat_menu_list': cat_menu_list})
+
 
 # Fonction qui recupere une requete et le nom d'une categorie, pour renvoyer une page contenant tous
 # les postes de cette categorie
@@ -34,6 +49,16 @@ def CategoryView(request, cats):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
+
+    """ Cette fonction permet de recuperer toutes les categories et de les afficher (dropdown) dans la
+    vue choisit (ici ArticleDetailView) """
+    def get_context_data(self, *args, **kwargs):
+        # Recuperation de toutes les categories
+        cat_menu = Category.objects.all()
+        # Aucune idee du reste
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context 
 
 
 class AddPostView(CreateView):
