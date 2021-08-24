@@ -6,6 +6,7 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+
         <h1>Add Post...</h1>
         <br><br>
         <div class='form-group'>
@@ -16,6 +17,14 @@
                 <button class="btn btn-success">Post</button>
                 <br><br>
         </div>
+
+        <!-- Ce script permet d'attribuer a l'entree <author> dans forms.py la valeur de l'identifiant
+        de l'utilisateur connecte -->
+        <script>
+            var name = "{{ user.id }}";
+            document.getElementById("author").value = name;
+        
+        </script>
 
     {% else %}
         You're not allowed here! (and you know it...)

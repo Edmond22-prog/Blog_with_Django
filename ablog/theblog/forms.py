@@ -16,9 +16,13 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'author', 'category', 'body')
 
+        """ Les attributs <attrs> sont des attributs CSS comme on les connais.
+        Le <type = hidden> permet de cacher l'objet de la vue de l'utilisateur, afin qu'il ne puisse
+        pas le modifier. """
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'author': forms.Select(attrs={'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'author', 'type': 'hidden'}),
+            #'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=categories_list, attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
