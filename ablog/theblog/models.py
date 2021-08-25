@@ -18,10 +18,18 @@ class Post (models.Model):
     title = models.CharField(max_length=255)
     # Choix de l'auteur du Poste du côté de l'administration
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Espace de texte pour la description du Poste
+    # Espace de texte pour la description du Poste du coté de l'administration
     body = models.TextField()
+    # Date de publication du Poste
     post_date = models.DateField(auto_now_add=True)
+    # Categorie de la publication du coté de l'administration
     category = models.CharField(max_length=255, default='coding')
+    # Determination des likeurs du poste du coté de l'administration
+    likes = models.ManyToManyField(User, related_name='blog_posts')
+
+
+    def total_likes(self):
+        return self.likes.count()
 
 
     # Fonction qui affiche on peux dire l'entête du Poste du coté administrateur

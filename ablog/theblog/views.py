@@ -1,13 +1,24 @@
+from django.http.response import HttpResponseRedirect
 from .models import Category, Post
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 # Importation des vues générique de Django
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import EditForm, PostForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 # Create your views here.
 """ def home (request):
     return render(request, 'home.html', {}) """
+
+
+def LikeView(request, pk):
+    # Recuperation du poste dont on a fait un clique sur le bouton <Like>
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    # Sauvegarde du like de l'utilisateur sur ce poste
+    post.likes.add(request.user)
+    # Retour sur la page sans chargement
+    return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+
 
 # Définition d'une classe HomeView qui permettra d'organiser les différents composants d'une page
 # en ListView, c'est à dire en liste descendante
@@ -58,6 +69,12 @@ class ArticleDetailView(DetailView):
         # Aucune idee du reste
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         context["cat_menu"] = cat_menu
+        # Ouverture du poste dont l'id est le suivant <pk> et stockage de ce poste dans la variable
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        # Recuperation de tous les likes de ce poste
+        total_likes = stuff.total_likes()
+        # Attribution du nombre de likes total au context, afin qu'il soit accessible dans les templates
+        context["total_likes"] = total_likes
         return context 
 
 
