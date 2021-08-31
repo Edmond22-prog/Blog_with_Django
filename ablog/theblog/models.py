@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime, date
+from ckeditor.fields import RichTextField
 
 class Category (models.Model):
     name = models.CharField(max_length=255)
@@ -19,7 +20,8 @@ class Post (models.Model):
     # Choix de l'auteur du Poste du côté de l'administration
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # Espace de texte pour la description du Poste du coté de l'administration
-    body = models.TextField()
+    body = RichTextField(blank=True, null=True)
+    #body = models.TextField()
     # Date de publication du Poste
     post_date = models.DateField(auto_now_add=True)
     # Categorie de la publication du coté de l'administration

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'theblog',
     'members',
+    'ckeditor', # C'est pour la personnalisation de l'entree de texte
 ]
 
 MIDDLEWARE = [
