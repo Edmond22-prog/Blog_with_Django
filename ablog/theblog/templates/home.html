@@ -24,7 +24,8 @@
 
                 </small> 
                 <br>
-                {{ post.body | slice:":200" | safe }}  {% comment %} Le slice permet de determiner le nombre de lettre a afficher {% endcomment %}
+                {{ post.snippet }}
+                {% comment %} {{ post.body | slice:":200" | safe }} {% endcomment %}  {% comment %} Le slice permet de determiner le nombre de lettre a afficher {% endcomment %}
                 <br>
             </li>
         {% endfor %}

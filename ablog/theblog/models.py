@@ -26,6 +26,7 @@ class Post (models.Model):
     post_date = models.DateField(auto_now_add=True)
     # Categorie de la publication du coté de l'administration
     category = models.CharField(max_length=255, default='coding')
+    snippet = models.CharField(max_length=255)
     # Determination des likeurs du poste du coté de l'administration
     likes = models.ManyToManyField(User, related_name='blog_posts')
 

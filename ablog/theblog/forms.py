@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ('title', 'author', 'category', 'body')
+        fields = ('title', 'author', 'category', 'body', 'snippet')
 
         """ Les attributs <attrs> sont des attributs CSS comme on les connais.
         Le <type = hidden> permet de cacher l'objet de la vue de l'utilisateur, afin qu'il ne puisse
@@ -25,6 +25,7 @@ class PostForm(forms.ModelForm):
             #'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=categories_list, attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'snippet': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 
@@ -32,10 +33,11 @@ class EditForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ('title', 'body')
+        fields = ('title', 'body', 'snippet')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             #'author': forms.Select(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'snippet': forms.Textarea(attrs={'class': 'form-control'}),
         }
