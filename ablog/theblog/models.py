@@ -17,6 +17,7 @@ class Category (models.Model):
 class Post (models.Model):
     # Définition du titre d'un Poste (dans le blog) du côté de l'administration
     title = models.CharField(max_length=255)
+    header_image = models.ImageField(blank=True, null=True, upload_to="images/")
     # Choix de l'auteur du Poste du côté de l'administration
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # Espace de texte pour la description du Poste du coté de l'administration

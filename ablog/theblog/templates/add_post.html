@@ -10,7 +10,8 @@
         <h1>Add Post...</h1>
         <br><br>
         <div class='form-group'>
-            <form method="POST">
+            {% comment %} Le 2e attribut du <form> autorise le formulaire a upload des images {% endcomment %}
+            <form method="POST" enctype="multipart/form-data">
         {% comment %} Je pense que ces commandes Django permettent d'importer les classes du 'models.py' {% endcomment %} 
                 {% csrf_token %}
                 {{ form.media }} {% comment %} Ce qui fournit les options de la zone de texte {% endcomment %}

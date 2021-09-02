@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ('title', 'author', 'category', 'body', 'snippet')
+        fields = ('title', 'author', 'category', 'body', 'snippet', 'header_image')
 
         """ Les attributs <attrs> sont des attributs CSS comme on les connais.
         Le <type = hidden> permet de cacher l'objet de la vue de l'utilisateur, afin qu'il ne puisse
