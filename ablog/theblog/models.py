@@ -4,6 +4,15 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+
+    def __str__(self):
+        return str(self.user)
+
+
 class Category (models.Model):
     name = models.CharField(max_length=255)
 
@@ -13,6 +22,7 @@ class Category (models.Model):
     
     def get_absolute_url(self):
         return reverse("home")
+
 
 class Post (models.Model):
     # Définition du titre d'un Poste (dans le blog) du côté de l'administration

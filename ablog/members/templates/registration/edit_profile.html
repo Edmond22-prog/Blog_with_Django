@@ -7,6 +7,9 @@
 
     <h1>Edit Profile...</h1>
     <br><br>
+    {% comment %} Apparition de la bio de l'utilisateur sur la page {% endcomment %}
+    {{ user.profile.bio }}
+    <br><br>
     <div class='form-group'>
         <form method="POST">
     {% comment %} Je pense que ces commandes Django permettent d'importer les classes du 'models.py' {% endcomment %} 
