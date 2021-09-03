@@ -8,6 +8,12 @@ from ckeditor.fields import RichTextField
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
+    profile_pic = models.ImageField(blank=True, null=True, upload_to="images/profile/")
+    website_url = models.CharField(max_length=255, blank=True, null=True)
+    facebook_url = models.CharField(max_length=255, blank=True, null=True)
+    twitter_url = models.CharField(max_length=255, blank=True, null=True)
+    instagram_url = models.CharField(max_length=255, blank=True, null=True)
+    pinterest_url = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return str(self.user)
