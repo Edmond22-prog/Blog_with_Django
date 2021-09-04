@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}   {% comment %} Permet de charger le dossier static {% endcomment %}
 
 {% comment %} Definition du titre de la page, pour qu'elle soit pareil au titre du Poste {% endcomment %}
 {% block title %}
@@ -71,7 +72,11 @@
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-2">
-                <img src="{{ post.author.profile.profile_pic.url }}" class="card-img">
+                {% if post.author.profile.profile_pic %}
+                    <img src="{{ post.author.profile.profile_pic.url }}" class="card-img">
+                {% else %}
+                    <img src="{% static 'theblog/images/default_profile_pic.jpeg' %}" class="card-img">
+                {% endif %}
             </div>
             <div class="col-md-10">
                 <div class="card-body">

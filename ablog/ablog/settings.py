@@ -125,6 +125,10 @@ STATIC_URL = '/static/'
 """ Rien compris de ce qui suit, mais important pour l'importation d'images """
 MEDIA_URL = '/media/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (
