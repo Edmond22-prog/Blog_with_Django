@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PasswordsChangeView, UserEditView, UserRegisterView
+from .views import PasswordsChangeView, ShowProfilePageView, UserEditView, UserRegisterView
 from django.contrib.auth import views as auth_views
 from . import views
 
@@ -12,5 +12,6 @@ urlpatterns = [
     # path('password/', auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html')), 
     path('password/', PasswordsChangeView.as_view(template_name='registration/change_password.html')),
     # Lien pour apres modification du mot de passe
-    path('password_success', views.password_success, name="password-success")
+    path('password_success', views.password_success, name="password-success"),
+    path('<int:pk>/profile/', ShowProfilePageView.as_view(), name="show-profile-page"),
 ]

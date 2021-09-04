@@ -1,10 +1,27 @@
+from theblog.models import Profile
 from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.forms import PasswordChangeForm
+from django.views.generic.detail import DetailView
 from .forms import EditProfileForm, PasswordChangingForm, SignUpForm
 from typing import Generic
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import reverse_lazy
+
+
+class ShowProfilePageView(DetailView):
+    model = Profile
+    template_name = 'registration/user_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        # Recuperation de tous les users
+        # users = Profile.objects.all()
+        # ??????
+        context = super(ShowProfilePageView , self).get_context_data(*args, **kwargs)
+        # Recuperation d'un user particulier
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        # Attribution au context
+        context["page_user"] = page_user
+        return context   
 
 
 class UserRegisterView(generic.CreateView):
