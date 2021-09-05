@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+    Edit Profile Page
+{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+        
+            <h1>Edit Profile Page...</h1>
+            <br><br>
+            <div class='form-group'>
+                {% comment %} Le 2e attribut du <form> autorise le formulaire a upload des images {% endcomment %}
+                <form method="POST" enctype="multipart/form-data">
+                {% comment %} Je pense que ces commandes Django permettent d'importer les classes du 'models.py' {% endcomment %} 
+                    {% csrf_token %}
+                    {{ form.as_p }} {% comment %} Positionne les elements du formulaire comme une balise choisis. ici c'est <p>{% endcomment %}
+                    <button class="btn btn-success">Update Profile Page</button>
+                    <br><br>
+            </div>
+
+        {% else %}
+            You're not the correct user to edit this page...
+        
+        {% endif %}    
+
+    {% else %}
+        You're not allowed here! (and you know it...)
+
+    {% endif %}
+
+
+{% endblock %}

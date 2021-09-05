@@ -2,23 +2,27 @@
 
 When it's okay, in your terminal:
 * Enter in the project folder 
-cd project_folder
+
+        cd project_folder
 
 * Activate the virtual environment
-source virt/bin/activate
+
+        source virt/bin/activate
 
 * Enter in the ablog folder
-cd ablog
 
-source .env
+        cd ablog
+
+        source .env
 
 * Run the server
-python (or python3) manage.py runserver
+
+        python (or python3) manage.py runserver
 
 * After that, if you don't have an error, open your navigator and tip : localhost:8000
 
 * For login, tip:
 
-Username: admin
+    Username: admin
 
-Password: djangoblog
+    Password: djangoblog
