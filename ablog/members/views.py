@@ -1,10 +1,24 @@
+from django.views.generic.edit import CreateView
 from theblog.models import Profile
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic.detail import DetailView
-from .forms import EditProfileForm, PasswordChangingForm, SignUpForm
+from .forms import EditProfileForm, PasswordChangingForm, ProfilePageForm, SignUpForm
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import reverse_lazy
+
+
+class CreateProfilePageView(CreateView):
+    form_class = ProfilePageForm
+    template_name = 'registration/create_user_profile_page.html'
+    #fields = '__all__'
+
+    # Si j'ai bien compris, cette fonction determine l'utilisateur qui veut creer une
+    # page de profil et lie son compte/ses configurations a ce profil, puis sauvegarde son
+    # formulaire de page de profil
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class EditProfilePageView(generic.UpdateView):
