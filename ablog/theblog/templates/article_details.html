@@ -66,28 +66,8 @@
         {% endif %}
         - {{ total_likes }} Likes
     </form>
-    <br><br>
-    <hr>
-
-    <h2>Comments...</h2>
     <br>
-    {% if not post.comments.all %}
-        No Comments Yet...<a href="#">Add One</a>
 
-    {% else %}
-        {% for comment in post.comments.all %}
-            <strong>
-                {{ comment.name }} - {{ comment.date_added }}
-            </strong>
-            <br>
-            {{ comment.body }}
-            <br><br>
-        
-        {% endfor %}
-    
-    {% endif %}
-    <hr> 
-    <br><br>
     <!-- Carte de profil de l'auteur du poste -->
     <div class="card mb-3">
         <div class="row g-0">
@@ -129,6 +109,28 @@
             </div>
         </div>
     </div>
+
+    <h1>Comments...</h1>
+    <br>
+    {% if not post.comments.all %}
+        No Comments Yet...<a href="{% url 'add-comment' post.pk %}">Add One</a>
+
+    {% else %}
+        <a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+        <br><br>
+        {% for comment in post.comments.all %}
+            <strong>
+                {{ comment.name }} - {{ comment.date_added }}
+            </strong>
+            <br>
+            {{ comment.body }}
+            <br>
+        
+        {% endfor %}
+        <br>
+        <a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+    {% endif %}
+    <hr> 
     <br><br>
     
 {% endblock %}

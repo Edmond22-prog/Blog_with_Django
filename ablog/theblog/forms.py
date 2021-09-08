@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Post
+from .models import Category, Comment, Post
 
 """ Definition statique de la liste de categories """
 #categories = [('Coding', 'Coding'), ('Sport', 'Sport'), ('Entertainment', 'Entertainment'),]
@@ -41,3 +41,16 @@ class EditForm(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'snippet': forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ('name', 'body')
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+

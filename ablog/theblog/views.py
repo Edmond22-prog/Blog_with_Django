@@ -1,9 +1,9 @@
 from django.http.response import HttpResponseRedirect
-from .models import Category, Post
+from .models import Category, Comment, Post
 from django.shortcuts import get_object_or_404, render
 # Importation des vues générique de Django
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import EditForm, PostForm
+from .forms import CommentForm, EditForm, PostForm
 from django.urls import reverse_lazy, reverse
 
 # Create your views here.
@@ -101,6 +101,19 @@ class AddPostView(CreateView):
     #fields = '__all__'  # Ici, on importe toutes les proprietes du model qu'on utilise
     # On pouvait aussi choisir celle que l'on veut utiliser en faisant ce qui suit :
     # fields = ('propriete1', 'propriete2', ...)
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+    #fields = '__all__'
+    success_url = reverse_lazy('home')
+
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 
 class AddCategoryView(CreateView):
