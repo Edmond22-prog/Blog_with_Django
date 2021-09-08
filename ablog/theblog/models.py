@@ -38,7 +38,7 @@ class Post (models.Model):
     # Définition du titre d'un Poste (dans le blog) du côté de l'administration
     title = models.CharField(max_length=255)
     header_image = models.ImageField(blank=True, null=True, upload_to="images/")
-    # Choix de l'auteur du Poste du côté de l'administration
+    # Determine l'auteur du Poste du côté de l'administration
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # Espace de texte pour la description du Poste du coté de l'administration
     body = RichTextField(blank=True, null=True)
@@ -66,6 +66,19 @@ class Post (models.Model):
         #return reverse("article-detail", args=(str(self.id)))
         return reverse("home")
     
+
+class Comment(models.Model):
+    # Determine le poste dont il est question
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    # Determine le nom de la personne qui a fait le commentaire
+    name = models.CharField(max_length=255)
+    # Texte du commentaire
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True) 
+
+
+    def __str__(self):
+        return '%s - %s' % (self.post.title, self.name)
 
 """ Après chaque action ici, il faut migrer, c-a-d 'python manage.py migrate' avant de lancer le serveur,
 pour sauvegarder dans la base de données. """   
